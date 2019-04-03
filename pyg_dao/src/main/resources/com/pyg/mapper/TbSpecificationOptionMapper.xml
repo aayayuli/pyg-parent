@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.pyg.mapper.TbSpecificationOptionMapper">
+    <select id="finAll" resultType="com.pyg.pojo.TbSpecificationOption">
+      select id,option_name as optionName ,spec_id as specId from tb_specification_option
+  </select>
+
+    <insert id="insert">
+         INSERT  INTO  tb_specification_option VALUES (null,#{optionName} ,#{specId}, #{orders})
+     </insert>
+
+    <select id="selectByKey" resultType="com.pyg.pojo.TbSpecificationOption">
+        SELECT  id,option_name as optionName ,spec_id as specId  FROM  tb_specification_option WHERE  id=#{id}
+    </select>
+
+    <update id="updateByKey">
+        UPDATE  tb_specification_option set option_name=#{optionName},spec_id=#{specId}  orders=#{orders} WHERE id=#{id}
+    </update>
+
+    <delete id="deleteByIds">
+        DELETE FROM  tb_specification_option WHERE  id= #{id}
+    </delete>
+
+    <select id="search" resultType="com.pyg.pojo.TbSpecificationOption">
+        SELECT id,name, first_char as firstChar FROM tb_brand
+        <where>
+            <if test="name!=null and name!=''">
+                name like '%${name}%'
+            </if>
+            <if test="firstChar!=null and firstChar!=''">
+                AND first_char=#{firstChar}
+            </if>
+        </where>
+    </select>
+
+
+    <select id="selectBySpecId" parameterType="long"  resultType="com.pyg.pojo.TbSpecificationOption">
+    SELECT  id ,option_name as optionName ,spec_id as specId,orders FROM  tb_specification_option WHERE spec_id=#{id}
+    </select>
+
+    <delete id="deleteBySpecId">
+        DELETE  FROM  tb_specification_option WHERE spec_id=#{id}
+    </delete>
+
+</mapper>

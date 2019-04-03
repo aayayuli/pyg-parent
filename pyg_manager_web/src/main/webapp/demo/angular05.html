@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>模块化设计</title>
+    <script type="text/javascript" src="../plugins/angularjs/angular.min.js"></script>
+    <script>
+        var app = angular.module("myApp", [])
+        app.controller("myController",function () {
+            $scope.user={"username":"zhangsan","age":30};
+
+        })
+    </script>
+</head>
+<body ng-app="myApp" ng-controller="myController">
+{{user.username}}
+
+</body>
+</html>

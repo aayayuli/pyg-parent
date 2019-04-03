@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.pyg.mapper.TbBrandMapper">
+    <select id="finAll" resultType="com.pyg.pojo.TbBrand">
+      select id,name ,first_char as firstChar from tb_brand
+  </select>
+
+    <insert id="insert">
+         INSERT  INTO  tb_brand(name,first_char) VALUES (#{name} ,#{firstChar})
+     </insert>
+
+    <select id="selectByKey" resultType="com.pyg.pojo.TbBrand">
+        SELECT  id,name,first_char as firstChar FROM  tb_brand WHERE  id=#{id}
+    </select>
+
+    <update id="updateByKey">
+        UPDATE  tb_brand set name=#{name},first_char=#{firstChar} WHERE id=#{id}
+    </update>
+
+    <delete id="deleteByIds">
+        DELETE FROM  tb_brand WHERE  id= #{id}
+    </delete>
+
+    <select id="search" resultType="com.pyg.pojo.TbBrand">
+        SELECT id,name, first_char as firstChar FROM tb_brand
+        <where>
+            <if test="name!=null and name!=''">
+                name like '%${name}%'
+            </if>
+            <if test="firstChar!=null and firstChar!=''">
+                AND first_char=#{firstChar}
+            </if>
+        </where>
+    </select>
+    
+    
+    <select id="findBrandList"   resultType="map">
+        SELECT id,name as text FROM  tb_brand
+    </select>
+
+</mapper>
