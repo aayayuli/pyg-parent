@@ -85,6 +85,5 @@ public class UserServiceImpl  implements UserService {
         user.setCreated(new Date());
         user.setUpdated(new Date());
         userMapper.insert(user);
-        System.out.println(userMapper);
     }
 }
